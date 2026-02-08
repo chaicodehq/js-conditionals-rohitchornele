@@ -27,4 +27,56 @@
  */
 export function calculateTax(income) {
   // Your code here
-}
+  let taxAmount;
+  let bracket1 = 10000;
+  let bracket2 = 30000;
+  let bracket3 = 70000;
+
+  if (income <= bracket1) {
+    taxAmount = 0;
+  } else if (income <= bracket2) {
+    taxAmount = bracketTwoTax(income, bracket1);
+  } else if (income <= bracket3) {
+    taxAmount = bracketThreeTax(income, bracket1, bracket2);
+  } else {
+    taxAmount = bracketFourTax(income, bracket1, bracket2, bracket3);
+  }
+
+  return taxAmount
+
+} 
+
+
+  function percentage(amount, percent) {
+    let taxAmount = 0
+    taxAmount = (amount * percent / 100);
+    console.log(taxAmount)
+    return taxAmount;
+  }
+
+  function bracketTwoTax (income, bracket1) {
+    let amount = income - bracket1
+    return amount = percentage(amount, 10)
+  }
+
+   function bracketThreeTax (income, bracket1, bracket2) {
+    let firstTaxBracket = bracket2 - bracket1;
+    let TaxBracket = income - bracket2;
+     let firstTax = percentage(firstTaxBracket, 10);
+    let amount = percentage(TaxBracket, 20);
+    let total = firstTax + amount;
+
+    return total
+  }
+
+  function bracketFourTax (income, bracket1, bracket2, bracket3) {
+    let firstTaxBracket = bracket2 - bracket1;
+    let secondTaxBracket = bracket3 - bracket2;
+    let TaxBracket = income - bracket3;
+    let firstTax = percentage(firstTaxBracket, 10)
+    let secondTax = percentage(secondTaxBracket, 20)
+    let amount = percentage(TaxBracket, 30)
+    let total = amount + firstTax + secondTax;
+
+    return total
+  }
